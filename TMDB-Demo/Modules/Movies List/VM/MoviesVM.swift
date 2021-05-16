@@ -12,6 +12,8 @@ class MoviesVM: ObservableObject {
     @Published private (set) var movies: [MovieDetails] = []
     @Published private (set) var state: FetchingServiceState = .finishedLoading
     
+    private (set) var moreMoviesAvailable = false
+    
     private (set) var currentPage: Int = 1
     private (set) var totalPages: Int = Int.max
     
@@ -25,14 +27,22 @@ class MoviesVM: ObservableObject {
         
         state = .loading
         apiClient.getMovies(service: moviesService) { (response) in
-            self.state = .finishedLoading
-            switch response {
-            case .success(let movies):
-                self.movies = movies.results
-                self.totalPages = movies.totalPages
-                self.currentPage += 1
-            case .failure(let error):
-                self.state = .error(error)
+            DispatchQueue.main.async {
+                self.state = .finishedLoading
+                switch response {
+                case .success(let movies):
+                    self.totalPages = movies.totalPages
+                    self.currentPage += 1
+                    if self.currentPage <= self.totalPages {
+                        self.moreMoviesAvailable = true
+                    }
+                    else {
+                        self.moreMoviesAvailable = false
+                    }
+                    self.movies.append(contentsOf: movies.results)
+                case .failure(let error):
+                    self.state = .error(error)
+                }
             }
         }
     }

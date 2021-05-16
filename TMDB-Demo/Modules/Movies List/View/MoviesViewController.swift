@@ -33,13 +33,10 @@ class MoviesViewController: UIViewController {
     
     private func bindWithVM() {
         moviesObserver = vm.$movies.sink(receiveValue: { (movies) in
-            DispatchQueue.main.async {
                 self.movies = movies
-            }
         })
         
         stateObsrver = vm.$state.sink(receiveValue: { (state) in
-            DispatchQueue.main.async {
                 switch state {
                 case .loading:
                     break
@@ -48,7 +45,6 @@ class MoviesViewController: UIViewController {
                 case .error(_):
                     break
                 }
-            }
         })
     }
     
@@ -56,17 +52,27 @@ class MoviesViewController: UIViewController {
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+//        if let movieDetailsVC = segue.destination as? MovieDetailsViewController, let cell = sender as? UITableViewCell {
+//            if let indexPath = tableView.indexPath(for: cell) {
+//                print("Row clicked- \(indexPath.row)")
+//            }
+//        }
     }
 }
 
 extension MoviesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        movies.count
+        vm.moreMoviesAvailable ? movies.count + 1 : movies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        if indexPath.row >= movies.count {
+            print("Fetch movies")
+            vm.fetchMovies()
+            return tableView.dequeueReusableCell(withIdentifier: "LoadingCell", for: indexPath)
+        }
+        else {
         let identifier = String(describing: MovieTableViewCell.self)
         guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? MovieTableViewCell else {
             fatalError("Unexpected-> TableView doesn't have a cell with identifier \(identifier)")
@@ -75,8 +81,7 @@ extension MoviesViewController: UITableViewDataSource {
         cell.configure(with: movies[indexPath.row])
         
         return cell
+        }
     }
-    
-    
 }
 
