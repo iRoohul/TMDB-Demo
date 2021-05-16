@@ -8,10 +8,12 @@
 import UIKit
 
 class MovieDetailsViewController: UIViewController {
+    
+    var vm: MovieDetailsVM!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        vm.fetchDetails()
     }
 }
