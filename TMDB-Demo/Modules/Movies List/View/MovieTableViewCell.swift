@@ -7,26 +7,34 @@
 
 import UIKit
 
+protocol MovieTableViewCellDelegate {
+    func bookButtonTapped(cell: MovieTableViewCell)
+}
+
 class MovieTableViewCell: UITableViewCell {
+    
+    //MARK:- IBOutlet
     
     @IBOutlet weak var movieImageView: RemoteImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var releaseDateLabel: UILabel!
     @IBOutlet weak var detailsLabel: UILabel!
+    
+    var delegate: MovieTableViewCellDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        clear()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
+    //MARK:- View setup
+    
     func configure(with movie: MovieDetails) {
-        clear()
         movieImageView.setImage(urlString: movie.cellImageUrl, placeholder: #imageLiteral(resourceName: "MoviePlaceholder"))
         
         nameLabel.text = movie.title
@@ -38,5 +46,11 @@ class MovieTableViewCell: UITableViewCell {
         nameLabel.text = ""
         releaseDateLabel.text = ""
         detailsLabel.text = ""
+    }
+    
+    //MARK:- IBAction
+    
+    @IBAction func bookButtonTapped(_ sender: UIButton) {
+        delegate?.bookButtonTapped(cell: self)
     }
 }
