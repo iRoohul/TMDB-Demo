@@ -8,17 +8,9 @@
 import Foundation
 
 struct MoviesService: Service {
-    
-    var baseURL: URL? {
-        URLs.baseURL.url
-    }
 
     var path: String {
         EndPoints.nowPlaying()
-    }
-
-    var headers: RequestHeaders? {
-        Parameters.defaultRequestHeaders
     }
     
     var parameters: [String: String]
@@ -34,7 +26,5 @@ struct MoviesService: Service {
 }
 
 protocol MoviesAPIclient {
-    func getMovies(service: Service, completion: @escaping (_ result: APIResponse<Movies>) -> ())
+    func getMovies(service: MoviesService, completion: @escaping (_ result: APIResponse<Movies>) -> ())
 }
-
-

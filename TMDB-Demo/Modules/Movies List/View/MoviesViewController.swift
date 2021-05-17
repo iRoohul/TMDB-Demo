@@ -56,7 +56,7 @@ class MoviesViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let movieDetailsVC = segue.destination as? MovieDetailsViewController {
             if let movie = sender as? MovieDetails {
-                movieDetailsVC.vm = MovieDetailsVM(movieId: String(movie.id))
+                movieDetailsVC.vm = MovieDetailsVM(selectedMovie: movie)
             }
         }
     }

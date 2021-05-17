@@ -38,7 +38,7 @@ class MovieTableViewCell: UITableViewCell {
         movieImageView.setImage(urlString: movie.cellImageUrl, placeholder: #imageLiteral(resourceName: "MoviePlaceholder"))
         
         nameLabel.text = movie.title
-        releaseDateLabel.text = "Released on " + movie.releaseDate
+        releaseDateLabel.text = "Release date : " + movie.releaseDate
         detailsLabel.text = movie.overview
     }
 

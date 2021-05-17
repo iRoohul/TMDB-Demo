@@ -16,7 +16,7 @@ class APIClient {
      - Parameter type: is generic type should be a model that conform to `Codable` protocol
      - Parameter completion: result of type `APIResponse`.
      */
-    private func request<T>(service: Service, completion: @escaping (APIResponse<T>) -> ()) where T: Decodable {
+    private func request<T: Codable>(service: Service, completion: @escaping (APIResponse<T>) -> ()) {
         guard let request = URLRequest(service: service) else {
             completion(.failure(.badRequest))
             return
@@ -55,11 +55,29 @@ class APIClient {
     
 }
 
-extension APIClient: MoviesAPIclient {
+protocol MovieDetailsAPIClient: MovieSynopsisAPIclient, MovieReviewsAPIclient, MovieCreditsAPIclient, SimilarMoviesAPIclient {}
+
+extension APIClient: MoviesAPIclient, MovieDetailsAPIClient {
     
     //MARK:- Services
     
-    func getMovies(service: Service, completion: @escaping (APIResponse<Movies>) -> ()) {
+    func getMovies(service: MoviesService, completion: @escaping (APIResponse<Movies>) -> ()) {
+        request(service: service, completion: completion)
+    }
+    
+    func getMovieSynopsis(service: MovieSynopsisService, completion: @escaping (APIResponse<MovieSynopsis>) -> ()) {
+        request(service: service, completion: completion)
+    }
+    
+    func getMovieReviews(service: ReviewsService, completion: @escaping (APIResponse<Reviews>) -> ()) {
+        request(service: service, completion: completion)
+    }
+    
+    func getMovieCredits(service: CreditsService, completion: @escaping (APIResponse<Credits>) -> ()) {
+        request(service: service, completion: completion)
+    }
+    
+    func getSimilar(service: SimilarMoviesService, completion: @escaping (APIResponse<Similar>) -> ()) {
         request(service: service, completion: completion)
     }
     

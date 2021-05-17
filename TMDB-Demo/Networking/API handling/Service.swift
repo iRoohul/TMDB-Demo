@@ -17,6 +17,17 @@ protocol Service {
 }
 
 extension Service {
+    //MARK:- Default values
+    //Default values are set here. As this is going to be the same for all services. If a service has different value, it will override.
+    var baseURL: URL? {
+        URLs.baseURL.url
+    }
+    
+    var headers: RequestHeaders? {
+        Parameters.defaultRequestHeaders
+    }
+    
+    //MARK:- Computed properties
     var fullURL: URL? {
         baseURL?.appendingPathComponent(path)
     }

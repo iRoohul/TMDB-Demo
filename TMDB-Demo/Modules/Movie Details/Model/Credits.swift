@@ -20,7 +20,7 @@ struct Cast: Codable {
     let gender, id: Int
     let knownForDepartment, name, originalName: String
     let popularity: Double
-    let profilePath: String
+    let profilePath: String?
     let castID: Int
     let character, creditID: String
     let order: Int
@@ -45,7 +45,8 @@ struct Crew: Codable {
     let gender, id: Int
     let knownForDepartment, name, originalName: String
     let popularity: Double
-    let profilePath, creditID, department, job: String
+    let profilePath: String?
+    let creditID, department, job: String
 
     enum CodingKeys: String, CodingKey {
         case adult, gender, id

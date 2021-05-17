@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE1EF81026522E07000D0C3A /* MovieReviewsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1EF80F26522E07000D0C3A /* MovieReviewsService.swift */; };
+		BE1EF81326522E17000D0C3A /* MovieCreditsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1EF81226522E17000D0C3A /* MovieCreditsService.swift */; };
+		BE1EF81626522E55000D0C3A /* SimilarMoviesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1EF81526522E55000D0C3A /* SimilarMoviesService.swift */; };
 		BE21CFA426511DCC00F14D3F /* Movies.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE21CFA326511DCC00F14D3F /* Movies.swift */; };
 		BE21CFB42651245A00F14D3F /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE21CFB32651245A00F14D3F /* NetworkConstants.swift */; };
 		BE21CFB726512B5800F14D3F /* APIclient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE21CFB626512B5800F14D3F /* APIclient.swift */; };
@@ -19,6 +22,7 @@
 		BE571CE92651476700C5366B /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE571CE82651476700C5366B /* DownloadManager.swift */; };
 		BE571CEC2651478000C5366B /* RemoteImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE571CEB2651478000C5366B /* RemoteImageView.swift */; };
 		BE571CF82651509F00C5366B /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE571CF72651509E00C5366B /* Service.swift */; };
+		BE597C2026522A92004CAF18 /* MovieSynopsisService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE597C1F26522A92004CAF18 /* MovieSynopsisService.swift */; };
 		BEBADC8A2651705600E8DEDC /* MovieDetailsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBADC892651705600E8DEDC /* MovieDetailsVM.swift */; };
 		BEBADC8E2651804A00E8DEDC /* MovieSynopsis.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBADC8D2651804A00E8DEDC /* MovieSynopsis.swift */; };
 		BEBADC952651819700E8DEDC /* Reviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBADC942651819700E8DEDC /* Reviews.swift */; };
@@ -34,6 +38,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BE1EF80F26522E07000D0C3A /* MovieReviewsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieReviewsService.swift; sourceTree = "<group>"; };
+		BE1EF81226522E17000D0C3A /* MovieCreditsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCreditsService.swift; sourceTree = "<group>"; };
+		BE1EF81526522E55000D0C3A /* SimilarMoviesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimilarMoviesService.swift; sourceTree = "<group>"; };
 		BE21CFA326511DCC00F14D3F /* Movies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movies.swift; sourceTree = "<group>"; };
 		BE21CFB32651245A00F14D3F /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
 		BE21CFB626512B5800F14D3F /* APIclient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIclient.swift; sourceTree = "<group>"; };
@@ -46,6 +53,7 @@
 		BE571CE82651476700C5366B /* DownloadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadManager.swift; sourceTree = "<group>"; };
 		BE571CEB2651478000C5366B /* RemoteImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteImageView.swift; sourceTree = "<group>"; };
 		BE571CF72651509E00C5366B /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		BE597C1F26522A92004CAF18 /* MovieSynopsisService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSynopsisService.swift; sourceTree = "<group>"; };
 		BEBADC892651705600E8DEDC /* MovieDetailsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsVM.swift; sourceTree = "<group>"; };
 		BEBADC8D2651804A00E8DEDC /* MovieSynopsis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSynopsis.swift; sourceTree = "<group>"; };
 		BEBADC942651819700E8DEDC /* Reviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reviews.swift; sourceTree = "<group>"; };
@@ -152,6 +160,17 @@
 			path = VM;
 			sourceTree = "<group>";
 		};
+		BE597C2226522A9F004CAF18 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				BE597C1F26522A92004CAF18 /* MovieSynopsisService.swift */,
+				BE1EF80F26522E07000D0C3A /* MovieReviewsService.swift */,
+				BE1EF81226522E17000D0C3A /* MovieCreditsService.swift */,
+				BE1EF81526522E55000D0C3A /* SimilarMoviesService.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 		BEBADC902651815D00E8DEDC /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -217,6 +236,7 @@
 		BEE15BA32650F3B1003E0D94 /* Movie Details */ = {
 			isa = PBXGroup;
 			children = (
+				BE597C2226522A9F004CAF18 /* API */,
 				BEBADC902651815D00E8DEDC /* Model */,
 				BE21CFA226511CFF00F14D3F /* View */,
 				BEBADC922651817500E8DEDC /* VM */,
@@ -303,8 +323,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE1EF81026522E07000D0C3A /* MovieReviewsService.swift in Sources */,
+				BE597C2026522A92004CAF18 /* MovieSynopsisService.swift in Sources */,
 				BEBADC8E2651804A00E8DEDC /* MovieSynopsis.swift in Sources */,
 				BEBADC952651819700E8DEDC /* Reviews.swift in Sources */,
+				BE1EF81626522E55000D0C3A /* SimilarMoviesService.swift in Sources */,
 				BE21CFBE26512E4700F14D3F /* Network Enums.swift in Sources */,
 				BE21CFC42651323D00F14D3F /* MoviesService.swift in Sources */,
 				BE21CFB42651245A00F14D3F /* NetworkConstants.swift in Sources */,
@@ -312,6 +335,7 @@
 				BE21CFA426511DCC00F14D3F /* Movies.swift in Sources */,
 				BEE15BA02650F399003E0D94 /* MovieDetailsViewController.swift in Sources */,
 				BE21CFC126512FBE00F14D3F /* URLSession+Extension.swift in Sources */,
+				BE1EF81326522E17000D0C3A /* MovieCreditsService.swift in Sources */,
 				BEBADC9C265181AE00E8DEDC /* SimilarMovies.swift in Sources */,
 				BEBADC8A2651705600E8DEDC /* MovieDetailsVM.swift in Sources */,
 				BEE15B852650ECB5003E0D94 /* AppDelegate.swift in Sources */,
