@@ -14,3 +14,18 @@ extension Dictionary {
         }
     }
 }
+
+extension String {
+    var formattedDate: String {
+        
+        let df = DateFormatter()
+        //Incoming format
+        df.dateFormat = "yyyy-MM-dd"
+        guard let date = df.date(from: self) else {return self}
+        
+        //Preferred format
+        df.dateFormat = "MMM d, yyyy"
+        
+        return df.string(from: date)
+    }
+}

@@ -18,7 +18,11 @@ class MovieTableViewCell: UITableViewCell {
     @IBOutlet weak var movieImageView: RemoteImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var releaseDateLabel: UILabel!
-    @IBOutlet weak var detailsLabel: UILabel!
+    @IBOutlet weak var genreLabel: UILabel!
+    
+    @IBOutlet weak var approvalLabel: UILabel!
+    
+    @IBOutlet weak var approvalProgressView: UIProgressView!
     
     var delegate: MovieTableViewCellDelegate?
 
@@ -37,15 +41,31 @@ class MovieTableViewCell: UITableViewCell {
     func configure(with movie: MovieDetails) {
         movieImageView.setImage(urlString: movie.cellImageUrl, placeholder: #imageLiteral(resourceName: "MoviePlaceholder"))
         
-        nameLabel.text = movie.title
-        releaseDateLabel.text = "Release date : " + movie.releaseDate
-        detailsLabel.text = movie.overview
+        nameLabel.text = movie.originalTitle
+        releaseDateLabel.text = movie.releaseDate.formattedDate
+        genreLabel.text = GenreHandler.shared.genreText(for: movie.genreIDS)
+        
+        //Approval
+        let approvalPercent = movie.voteAverage * 10
+        
+        approvalProgressView.progress = Float(approvalPercent/100)
+        approvalLabel.text = "Approval- " + String(Int(approvalPercent)) + "%"
+        
+        if approvalPercent > 75 {
+            approvalProgressView.progressTintColor = .systemGreen
+        }
+        else if approvalPercent > 50 {
+            approvalProgressView.progressTintColor = .systemOrange
+        }
+        else {
+            approvalProgressView.progressTintColor = .red
+        }
     }
 
     private func clear() {
         nameLabel.text = ""
         releaseDateLabel.text = ""
-        detailsLabel.text = ""
+        genreLabel.text = ""
     }
     
     //MARK:- IBAction

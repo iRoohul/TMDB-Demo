@@ -73,6 +73,13 @@ struct BelongsToCollection: Codable {
 struct Genre: Codable {
     let id: Int
     let name: String
+    
+    /**
+     A bullet Symbol (•) before genre name
+     */
+    var formattedName: String {
+        "\u{2022} " + name
+    }
 }
 
 // MARK: - ProductionCompany

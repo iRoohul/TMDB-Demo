@@ -30,6 +30,8 @@ struct EndPoints {
     static func similar(id: String) -> String {"/movie/\(id)/similar"}
 
     static func reviews(id: String) -> String {"/movie/\(id)/reviews"}
+    
+    static func genreList() -> String {"/genre/movie/list"}
 }
 
 //MARK:- Poster sizes
