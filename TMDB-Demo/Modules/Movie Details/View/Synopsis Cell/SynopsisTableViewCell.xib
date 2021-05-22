@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SynopsisTableViewCell" rowHeight="535" id="aUS-Ow-CQd" customClass="SynopsisTableViewCell" customModule="TMDB_Demo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="535"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aUS-Ow-CQd" id="7W8-GO-xcH">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="535"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="N9g-Si-rLv" customClass="RemoteImageView" customModule="TMDB_Demo" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="535"/>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="N9g-Si-rLv" secondAttribute="trailing" id="2nx-Xa-PYO"/>
+                    <constraint firstAttribute="bottom" secondItem="N9g-Si-rLv" secondAttribute="bottom" id="8mG-gZ-PDh"/>
+                    <constraint firstItem="N9g-Si-rLv" firstAttribute="leading" secondItem="7W8-GO-xcH" secondAttribute="leading" id="GWH-04-beO"/>
+                    <constraint firstItem="N9g-Si-rLv" firstAttribute="top" secondItem="7W8-GO-xcH" secondAttribute="top" id="faK-De-uw1"/>
+                    <constraint firstItem="N9g-Si-rLv" firstAttribute="top" secondItem="7W8-GO-xcH" secondAttribute="top" id="gD5-ka-CCk"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="movieImageView" destination="N9g-Si-rLv" id="IaJ-vf-1kD"/>
+            </connections>
+            <point key="canvasLocation" x="75" y="91"/>
+        </tableViewCell>
+    </objects>
+</document>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UuT-RW-CEv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="IIN-Ah-UMk">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Noe Playing-->
+        <!--Now Playing-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController storyboardIdentifier="MoviesViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="MoviesViewController" customModule="TMDB_Demo" customModuleProvider="target" sceneMemberID="viewController">
@@ -33,6 +33,11 @@
                                                         <constraint firstAttribute="width" constant="100" id="4JI-pg-6xg"/>
                                                         <constraint firstAttribute="width" secondItem="iVz-G5-Xwp" secondAttribute="height" multiplier="500:750" id="zfB-pu-Tl2"/>
                                                     </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="usY-5P-yYa">
                                                     <rect key="frame" x="20" y="169" width="100" height="41"/>
@@ -138,7 +143,7 @@
                             <constraint firstItem="5oa-FP-wSD" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="zKZ-11-Efu"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Noe Playing" id="BRA-qj-8WT"/>
+                    <navigationItem key="navigationItem" title="Now Playing" id="BRA-qj-8WT"/>
                     <connections>
                         <outlet property="tableView" destination="5oa-FP-wSD" id="r0D-TN-gUv"/>
                         <segue destination="atX-Jq-vJU" kind="show" identifier="MovieDetailsViewController" id="grS-gk-KU7"/>
@@ -146,7 +151,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="655.07246376811599" y="88.392857142857139"/>
+            <point key="canvasLocation" x="1565.217391304348" y="88.392857142857139"/>
         </scene>
         <!--Movie Details View Controller-->
         <scene sceneID="QjB-ZO-URg">
@@ -155,32 +160,51 @@
                     <view key="view" contentMode="scaleToFill" id="cJ7-xx-P4I">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JkZ-Yi-vXI">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="atX-Jq-vJU" id="kcl-e1-0lN"/>
+                                    <outlet property="delegate" destination="atX-Jq-vJU" id="kXn-pW-wpW"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="KKP-Bo-1q3"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="JkZ-Yi-vXI" secondAttribute="bottom" id="2aG-rG-pQx"/>
+                            <constraint firstItem="JkZ-Yi-vXI" firstAttribute="top" secondItem="cJ7-xx-P4I" secondAttribute="top" id="7sd-g0-1J6"/>
+                            <constraint firstItem="KKP-Bo-1q3" firstAttribute="trailing" secondItem="JkZ-Yi-vXI" secondAttribute="trailing" id="A4W-Tl-YAc"/>
+                            <constraint firstItem="JkZ-Yi-vXI" firstAttribute="leading" secondItem="KKP-Bo-1q3" secondAttribute="leading" id="b9l-pM-b0i"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="dxb-dG-IYa"/>
+                    <connections>
+                        <outlet property="tableView" destination="JkZ-Yi-vXI" id="Na7-M0-3eK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i88-iS-kCT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1451" y="88"/>
+            <point key="canvasLocation" x="2360.8695652173915" y="87.723214285714278"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="cWd-YZ-F1u">
+        <scene sceneID="DyJ-bm-hgE">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="UuT-RW-CEv" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IIN-Ah-UMk" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wb9-dg-nH8">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZFF-ro-crM">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="1zc-CX-9s2"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="6hc-1B-zFE"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qqy-Gd-glf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Opw-KO-O7Q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-200" y="88"/>
+            <point key="canvasLocation" x="655.07246376811599" y="88.392857142857139"/>
         </scene>
     </scenes>
     <resources>

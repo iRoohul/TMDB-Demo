@@ -13,7 +13,6 @@ class APIClient {
 
     /**
      Call this method to perfom a web service of type `Service`
-     - Parameter type: is generic type should be a model that conform to `Codable` protocol
      - Parameter completion: result of type `APIResponse`.
      */
     private func request<T: Codable>(service: Service, completion: @escaping (APIResponse<T>) -> ()) {

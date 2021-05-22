@@ -31,6 +31,10 @@ struct MovieSynopsis: Codable {
     let video: Bool
     let voteAverage: Double
     let voteCount: Int
+    
+    var imageUrl: String? {
+        return Poster(size: .detailsSize, path: posterPath).urlString
+    }
 
     enum CodingKeys: String, CodingKey {
         case adult
