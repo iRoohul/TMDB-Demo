@@ -14,7 +14,7 @@ class RecentSearchHandler {
         getRecentSearched()
     }
     
-    let maxResult = 5
+    let maxResults = 5
     var recentSearchedMovies: [MovieDetails] = []
     
     private let recentlySearchedMoviesCache = NSCache<NSString, MovieCache>()
@@ -23,14 +23,12 @@ class RecentSearchHandler {
         //If movie is already in the list, just remove it. It will be added at the top as a new entry.
         recentSearchedMovies.removeAll(where: {$0.id == movie.id})
         
-        if recentSearchedMovies.count >= maxResult {
+        if recentSearchedMovies.count >= maxResults {
             recentSearchedMovies.removeLast()
         }
         recentSearchedMovies.insert(movie, at: 0)
         
         recentlySearchedMoviesCache.setObject(MovieCache(movies: recentSearchedMovies), forKey: cacheKey as NSString)
-        if let objevt = recentlySearchedMoviesCache.object(forKey: cacheKey as NSString) {
-        }
     }
     
     private let cacheKey = "RecentlySearchedMoviesCache"

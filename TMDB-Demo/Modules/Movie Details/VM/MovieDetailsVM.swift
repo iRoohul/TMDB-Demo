@@ -54,9 +54,7 @@ protocol MovieDetailVMitem {
 
 struct SynopsisItem: MovieDetailVMitem {
     mutating func updateData<T: Codable>(data: T) {
-        if let synopsis = data as? MovieSynopsis {
-            self.data = synopsis
-        }
+        self.data = data as? MovieSynopsis
     }
     
     
@@ -72,12 +70,12 @@ struct SynopsisItem: MovieDetailVMitem {
 
 struct SimilarItem: MovieDetailVMitem {
     mutating func updateData<T: Codable>(data: T) {
-        
+        self.data = data as? Similar
     }
     
     var type: MovieDetailType = .similar
     let cellIdentifier = String(describing: SimilarMoviesTableViewCell.self)
-    let rowHeight: CGFloat = 200
+    let rowHeight: CGFloat = 350
     var state: FetchingServiceState = .finishedLoading
     
     var data: Similar?
@@ -87,7 +85,9 @@ struct SimilarItem: MovieDetailVMitem {
 
 struct CastItem: MovieDetailVMitem {
     mutating func updateData<T: Codable>(data: T) {
-        
+        if let credit = data as? Credits {
+            self.data = credit.cast
+        }
     }
     
     var type: MovieDetailType = .cast
@@ -102,7 +102,9 @@ struct CastItem: MovieDetailVMitem {
 
 struct CrewItem: MovieDetailVMitem {
     mutating func updateData<T: Codable>(data: T) {
-        
+        if let credit = data as? Credits {
+            self.data = credit.crew
+        }
     }
     
     var type: MovieDetailType = .crew
@@ -117,7 +119,7 @@ struct CrewItem: MovieDetailVMitem {
 
 struct ReviewsItem: MovieDetailVMitem {
     mutating func updateData<T: Codable>(data: T) {
-        
+        self.data = data as? Reviews
     }
     
     var type: MovieDetailType = .review
@@ -132,7 +134,7 @@ struct ReviewsItem: MovieDetailVMitem {
 
 class MovieDetailsVM: ObservableObject {
     
-    @Published var vmItem: [MovieDetailVMitem] = [SynopsisItem(), SimilarItem(), CastItem(), CrewItem(), ReviewsItem()]
+    @Published var vmItem: [MovieDetailVMitem] = [SynopsisItem(), SimilarItem(), CastItem(), CrewItem()]
     
     private (set) var selectedMovie: MovieDetails
     private let apiClient: MovieDetailsAPIClient = APIClient()
@@ -174,42 +176,52 @@ class MovieDetailsVM: ObservableObject {
     
     //MARK:- Credits
     private func fetchCredits() {
-//        let service = CreditsService(movieId: String(selectedMovie.id), parameters: [:])
-//
-//        state.creditsState = .loading
-//        apiClient.getMovieCredits(service: service) { response in
-//
-//            DispatchQueue.main.async {
-//                self.state.creditsState = .finishedLoading
-//
-//                switch response {
-//                case .success(let credits):
-//                    self.vmItem.credits = credits
-//                case .failure(let error):
-//                    self.state.creditsState = .error(error)
-//                }
-//            }
-//        }
+        if let castIndex = vmItem.firstIndex(where: {$0.type == .cast}), let crewIndex = vmItem.firstIndex(where: {$0.type == .crew}) {
+            let service = CreditsService(movieId: String(selectedMovie.id), parameters: [:])
+            
+            vmItem[castIndex].state = .loading
+            vmItem[crewIndex].state = .loading
+            
+            apiClient.getMovieCredits(service: service) { response in
+                
+                DispatchQueue.main.async {
+                    self.vmItem[castIndex].state = .finishedLoading
+                    self.vmItem[crewIndex].state = .finishedLoading
+
+                    switch response {
+                    case .success(let credit):
+                        self.vmItem[castIndex].updateData(data: credit.cast)
+                        self.vmItem[crewIndex].updateData(data: credit.crew)
+                    case .failure(let error):
+                        self.vmItem[castIndex].state = .error(error)
+                        self.vmItem[crewIndex].state = .error(error)
+                    }
+                }
+            }
+        }
     }
 
     //MARK:- Similar
     private func fetchSimilar() {
-//        let service = SimilarMoviesService(movieId: String(selectedMovie.id), parameters: [:])
-//
-//        state.similarState = .loading
-//        apiClient.getSimilar(service: service) { response in
-//
-//            DispatchQueue.main.async {
-//                self.state.similarState = .finishedLoading
-//
-//                switch response {
-//                case .success(let similar):
-//                    self.vmItem.similar = similar
-//                case .failure(let error):
-//                    self.state.similarState = .error(error)
-//                }
-//            }
-//        }
+        if let similarIndex = vmItem.firstIndex(where: {$0.type == .similar}) {
+            let service = SimilarMoviesService(movieId: String(selectedMovie.id), parameters: [:])
+            
+            vmItem[similarIndex].state = .loading
+            
+            apiClient.getSimilar(service: service) { response in
+                
+                DispatchQueue.main.async {
+                    self.vmItem[similarIndex].state = .finishedLoading
+                    
+                    switch response {
+                    case .success(let movies):
+                        self.vmItem[similarIndex].updateData(data: movies)
+                    case .failure(let error):
+                        self.vmItem[similarIndex].state = .error(error)
+                    }
+                }
+            }
+        }
     }
 
     //MARK:- Reviews
