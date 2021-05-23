@@ -51,6 +51,7 @@
 		BEE15BA02650F399003E0D94 /* MovieDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE15B9F2650F399003E0D94 /* MovieDetailsViewController.swift */; };
 		BEE9DD4F265A0D1F00B2BDE2 /* SearchServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE9DD4E265A0D1F00B2BDE2 /* SearchServiceTests.swift */; };
 		BEE9DD55265A1D5400B2BDE2 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE9DD54265A1D5400B2BDE2 /* SearchTableViewCell.swift */; };
+		BEE9DD63265A39F000B2BDE2 /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE9DD62265A39F000B2BDE2 /* LoadMoreTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +113,7 @@
 		BEE9DD44265A0CA300B2BDE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BEE9DD4E265A0D1F00B2BDE2 /* SearchServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchServiceTests.swift; sourceTree = "<group>"; };
 		BEE9DD54265A1D5400B2BDE2 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
+		BEE9DD62265A39F000B2BDE2 /* LoadMoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMoreTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 				BEE15B9C2650F38C003E0D94 /* MoviesViewController.swift */,
 				BE571CE52651470700C5366B /* MovieTableViewCell.swift */,
 				BEE9DD54265A1D5400B2BDE2 /* SearchTableViewCell.swift */,
+				BEE9DD62265A39F000B2BDE2 /* LoadMoreTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -489,6 +492,7 @@
 				BE21CFB726512B5800F14D3F /* APIclient.swift in Sources */,
 				BE21CFA426511DCC00F14D3F /* Movies.swift in Sources */,
 				BEE9DD55265A1D5400B2BDE2 /* SearchTableViewCell.swift in Sources */,
+				BEE9DD63265A39F000B2BDE2 /* LoadMoreTableViewCell.swift in Sources */,
 				BE57D32D265971800091157B /* GenreHandler.swift in Sources */,
 				BEE15BA02650F399003E0D94 /* MovieDetailsViewController.swift in Sources */,
 				BE21CFC126512FBE00F14D3F /* URLSession+Extension.swift in Sources */,

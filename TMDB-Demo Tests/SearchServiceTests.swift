@@ -16,9 +16,10 @@ struct MockMovie: Searchable, Equatable {
     var title: String
     
     static var mockList: [MockMovie] {
-        [MockMovie(title: "Dilwale Dulhania Le Jaayenge"), MockMovie(title: "The Godzila"), MockMovie(title: "The Garage"), MockMovie(title: "The Garbage Story"), MockMovie(title: "The Spider man")]
+        [MockMovie(title: "Dilwale Dulhania Le Jaayenge"), MockMovie(title: "The Godzila"), MockMovie(title: "The Garage"), MockMovie(title: "The Garbage Story"), MockMovie(title: "The Spider man"), MockMovie(title: "موسى")]
     }
 }
+
 
 class SearchServiceTests: XCTestCase {
     
@@ -48,6 +49,8 @@ class SearchServiceTests: XCTestCase {
         XCTAssert(list.contains(where: {$0.title == "The Godzila"}), "The Godzila is not in the list")
         XCTAssert(list.contains(where: {$0.title == "The Garage"}), "The Garage is not in the list")
         XCTAssert(list.contains(where: {$0.title == "The Spider man"}), "The Garage is not in the list")
+        XCTAssert(list.contains(where: {$0.title == "موسى"}), "موسى is not in the list")
+
 
         var filteredList: [MockMovie] = []
         
@@ -84,8 +87,18 @@ class SearchServiceTests: XCTestCase {
         XCTAssertEqual(filteredList.contains(where: {$0.title == "The Godzila"}), true, "Expected 'The Godzila' for 'the g' search term")
 
         XCTAssertEqual(filteredList.contains(where: {$0.title == "Dilwale Dulhania Le Jaayenge"}), false, "Not expected DDLJ for 'the g' search term")
-
+        
     //Case- 4
+           
+           //When
+           
+           filteredList = list.searchFilter(with: "م")
+
+           //Then
+           XCTAssertEqual(filteredList.contains(where: {$0.title == "موسى"}), true, "Expected \("موسى") for \("م") search term")
+           XCTAssertEqual(filteredList.contains(where: {$0.title == "The Godzila"}), false, "Not expected 'The Godzila' for \("م") search term")
+
+    //Case- 5
 
         //When
         filteredList = list.searchFilter(with: "")
@@ -95,14 +108,14 @@ class SearchServiceTests: XCTestCase {
         XCTAssertEqual(filteredList.count, list.count)
 
 
-    //Case- 5
+    //Case- 6
         
         XCTAssertEqual(list.searchFilter(with: "the"), list.searchFilter(with: " the"))
         XCTAssertEqual(list.searchFilter(with: "the"), list.searchFilter(with: "the "))
         XCTAssertEqual(list.searchFilter(with: "the"), list.searchFilter(with: " the "))
 
 
-    //Case- 6
+    //Case- 7
         
         //When
         filteredList = list.searchFilter(with: "any random text")

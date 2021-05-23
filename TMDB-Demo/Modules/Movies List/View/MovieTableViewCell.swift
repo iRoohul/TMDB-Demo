@@ -13,6 +13,8 @@ protocol MovieTableViewCellDelegate {
 
 class BaseMovieTableViewCell: UITableViewCell {
     
+    var delegate: MovieTableViewCellDelegate?
+
     @IBOutlet weak var movieImageView: RemoteImageView!
     @IBOutlet weak var nameLabel: UILabel!
 
@@ -20,9 +22,7 @@ class BaseMovieTableViewCell: UITableViewCell {
         super.awakeFromNib()
     }
     
-    func configure(with movie: MovieDetails) {
-        nameLabel.text = movie.originalTitle
-    }
+    func configure(with movie: MovieDetails) {}
 
 }
 
@@ -38,8 +38,6 @@ class MovieTableViewCell: BaseMovieTableViewCell {
     
     @IBOutlet weak var approvalProgressView: UIProgressView!
     
-    var delegate: MovieTableViewCellDelegate?
-
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -56,6 +54,7 @@ class MovieTableViewCell: BaseMovieTableViewCell {
         super.configure(with: movie)
         
         movieImageView.setImage(urlString: movie.cellImageUrl, placeholder: #imageLiteral(resourceName: "MoviePlaceholder"))
+        nameLabel.text = movie.originalTitle
         
         releaseDateLabel.text = movie.releaseDate.formattedDate
         genreLabel.text = GenreHandler.shared.genreText(for: movie.genreIDS)

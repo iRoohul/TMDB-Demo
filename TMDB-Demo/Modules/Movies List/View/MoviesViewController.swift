@@ -73,36 +73,31 @@ extension MoviesViewController: UITableViewDataSource, UITableViewDelegate,Movie
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if movies.count > 1 {
-            return movies[section].type.rawValue
-        }
-        return nil
+        movies[section].sectionHeader
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        //Only for `Now playing` section, add 1 more row(to show loader). Cell for row will add this row at the bottom
-        //VM maintains a Bool `showLoadMoreRow` whether to show load more or not.
-        (movies[section].type == .nowPlaying && vm.showLoadMoreRow) ? movies[section].movies.count + 1 : movies[section].movies.count
+        movies[section].movies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row >= movies[indexPath.section].movies.count {
-            print("Fetch movies")
-            vm.fetchMovies()
-            return tableView.dequeueReusableCell(withIdentifier: "LoadingCell", for: indexPath)
+        let section = movies[indexPath.section]
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: section.cellIdentifier, for: indexPath) as? BaseMovieTableViewCell else {
+            fatalError("UNEXPECTED : TableView doesn't have a cell with identifier \(section.cellIdentifier) OR the cell is not a subclass of " + String(describing: BaseMovieTableViewCell.self))
         }
-        else {
-            let identifier = String(describing: MovieTableViewCell.self)
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? MovieTableViewCell else {
-                fatalError("Unexpected-> TableView doesn't have a cell with identifier \(identifier)")
-            }
-            
-            cell.configure(with: movies[indexPath.section].movies[indexPath.row])
-            cell.delegate = self
-            
-            return cell
+        
+        if let movie = section.movies[indexPath.row] {
+            cell.configure(with: movie)
+        }
+        cell.delegate = self
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if movies[indexPath.section].type == .loadMore {
+            vm.fetchMovies()
         }
     }
     

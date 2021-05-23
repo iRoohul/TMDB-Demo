@@ -154,22 +154,25 @@
                                             <outlet property="releaseDateLabel" destination="zh3-5k-rWb" id="5LN-bZ-kw0"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoadingCell" id="26X-22-F4q">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoadMoreTableViewCell" id="26X-22-F4q" customClass="LoadMoreTableViewCell" customModule="TMDB_Demo" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="397" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="26X-22-F4q" id="dg9-MO-9Of">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="BJd-gt-VIE">
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="SFi-uC-me0">
                                                     <rect key="frame" x="197" y="12" width="20" height="20"/>
                                                 </activityIndicatorView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="BJd-gt-VIE" firstAttribute="centerX" secondItem="dg9-MO-9Of" secondAttribute="centerX" id="Mg5-XY-cDZ"/>
-                                                <constraint firstItem="BJd-gt-VIE" firstAttribute="centerY" secondItem="dg9-MO-9Of" secondAttribute="centerY" id="lur-ys-fi5"/>
+                                                <constraint firstItem="SFi-uC-me0" firstAttribute="centerY" secondItem="dg9-MO-9Of" secondAttribute="centerY" id="0ut-HE-6E0"/>
+                                                <constraint firstItem="SFi-uC-me0" firstAttribute="centerX" secondItem="dg9-MO-9Of" secondAttribute="centerX" id="vkW-Gh-jE4"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="activityView" destination="SFi-uC-me0" id="Pix-ZO-Aj8"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>

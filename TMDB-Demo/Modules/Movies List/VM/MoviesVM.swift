@@ -7,33 +7,43 @@
 
 import Foundation
 
-/**
- The raw value can be used as the section title
- */
-enum MovieListType: String {
-    case recentSearch = "Recently Searched"
-    case nowPlaying = "Now Playing"
+enum MovieListType {
+    case recentSearch
+    case nowPlaying
+    case loadMore
 }
 
 protocol MoviesVMitem {
     var type: MovieListType {get}
     var cellIdentifier: String {get}
     
-    var movies: [MovieDetails] {get set}
+    var sectionHeader: String? {get set}
+    
+    var movies: [MovieDetails?] {get set}
 }
 
 struct NowPlayingItem: MoviesVMitem {
     let type: MovieListType = .nowPlaying
     let cellIdentifier = String(describing: MovieTableViewCell.self)
+    var sectionHeader: String?
     
-    var movies: [MovieDetails]
+    var movies: [MovieDetails?]
 }
 
 struct RecentSearchItem: MoviesVMitem {
     let type: MovieListType = .recentSearch
     let cellIdentifier = String(describing: SearchTableViewCell.self)
+    var sectionHeader: String?
     
-    var movies: [MovieDetails]
+    var movies: [MovieDetails?]
+}
+
+struct LoadMoreItem: MoviesVMitem {
+    let type: MovieListType = .loadMore
+    let cellIdentifier = String(describing: LoadMoreTableViewCell.self)
+    var sectionHeader: String?
+    
+    var movies: [MovieDetails?]
 }
 
 
@@ -58,19 +68,19 @@ class MoviesVM: ObservableObject {
                 //If now playing movies are not there create one and add
                 self.movies.append(NowPlayingItem(movies: self.filteredMovies))
             }
+            checkLoadMoreRowStatus()
         }
     }
     
-    var searching = false
-    
-    var showLoadMoreRow: Bool {
-        searching == false && moreMoviesAvailable == true
+    var searching = false {
+        didSet {
+            checkLoadMoreRowStatus()
+        }
     }
     
     @Published private (set) var movies: [MoviesVMitem] = []
     @Published private (set) var state: FetchingServiceState = .finishedLoading
     
-    private var moreMoviesAvailable = false
     private (set) var currentPage: Int = 1
     private (set) var totalPages: Int = Int.max
     
@@ -79,7 +89,10 @@ class MoviesVM: ObservableObject {
     //MARK:- Functions
     func fetchMovies() {
         if searching {return}
-        if currentPage > totalPages {return}
+        if currentPage > totalPages {
+            checkLoadMoreRowStatus()
+            return
+        }
         
         let moviesService = MoviesService(parameters: [ParameterKeys.page.rawValue: String(currentPage)])
         
@@ -91,17 +104,29 @@ class MoviesVM: ObservableObject {
                 case .success(let movies):
                     self.totalPages = movies.totalPages
                     self.currentPage += 1
-                    if self.currentPage <= self.totalPages {
-                        self.moreMoviesAvailable = true
-                    }
-                    else {
-                        self.moreMoviesAvailable = false
-                    }
+
                     self.allMovies.append(contentsOf: movies.results)
                 case .failure(let error):
                     self.state = .error(error)
                 }
             }
+        }
+    }
+    
+    //MARK:- Show more row
+    private var showLoadMoreRow: Bool {
+        searching == false && (currentPage <= totalPages)
+    }
+    
+    private func checkLoadMoreRowStatus() {
+        if showLoadMoreRow {
+            self.movies.removeAll(where: {$0.type == .loadMore})
+
+            //Adding nil to movies as Load more will need to add 1 row(Load more) at the bottom
+            self.movies.append(LoadMoreItem(movies: [nil]))
+        }
+        else {
+            self.movies.removeAll(where: {$0.type == .loadMore})
         }
     }
     
