@@ -26,6 +26,7 @@ class MoviesViewController: UIViewController {
         super.viewDidLoad()
         
         tableView.tableFooterView = UIView()
+        addSearchController()
         
         bindWithVM()
         vm.fetchMovies()
@@ -61,6 +62,8 @@ class MoviesViewController: UIViewController {
         }
     }
 }
+
+//MARk:- UITableView handling
 
 extension MoviesViewController: UITableViewDataSource, UITableViewDelegate,MovieTableViewCellDelegate {
     
@@ -108,5 +111,28 @@ extension MoviesViewController: UITableViewDataSource, UITableViewDelegate,Movie
             performSegue(withIdentifier: String(describing: MovieDetailsViewController.self), sender: movies[indexPath.section].movies[indexPath.row])
         }
     }
+}
+
+//MARK:- Search Handling
+
+extension MoviesViewController: UISearchResultsUpdating {
+    
+    //MARK:- UISearchResultsUpdating Delegate
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else { return }
+            print(text)
+    }
+    
+    //MARK:-  Add functionality
+    
+    private func addSearchController() {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Movie"
+        navigationItem.searchController = searchController
+    }
+
 }
 
