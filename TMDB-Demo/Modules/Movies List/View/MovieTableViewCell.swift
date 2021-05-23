@@ -11,12 +11,26 @@ protocol MovieTableViewCellDelegate {
     func bookButtonTapped(cell: MovieTableViewCell)
 }
 
-class MovieTableViewCell: UITableViewCell {
-    
-    //MARK:- IBOutlet
+class BaseMovieTableViewCell: UITableViewCell {
     
     @IBOutlet weak var movieImageView: RemoteImageView!
     @IBOutlet weak var nameLabel: UILabel!
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
+    func configure(with movie: MovieDetails) {
+        nameLabel.text = movie.originalTitle
+    }
+
+}
+
+
+class MovieTableViewCell: BaseMovieTableViewCell {
+    
+    //MARK:- IBOutlet
+    
     @IBOutlet weak var releaseDateLabel: UILabel!
     @IBOutlet weak var genreLabel: UILabel!
     
@@ -38,10 +52,11 @@ class MovieTableViewCell: UITableViewCell {
     
     //MARK:- View setup
     
-    func configure(with movie: MovieDetails) {
+    override func configure(with movie: MovieDetails) {
+        super.configure(with: movie)
+        
         movieImageView.setImage(urlString: movie.cellImageUrl, placeholder: #imageLiteral(resourceName: "MoviePlaceholder"))
         
-        nameLabel.text = movie.originalTitle
         releaseDateLabel.text = movie.releaseDate.formattedDate
         genreLabel.text = GenreHandler.shared.genreText(for: movie.genreIDS)
         

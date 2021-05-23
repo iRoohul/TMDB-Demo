@@ -61,6 +61,10 @@ struct MovieDetails: Codable, Searchable {
     }
     
     var cellImageUrl: String? {
-        return Poster(size: .listSize, path: posterPath).urlString
+        Poster(size: .listSize, path: posterPath).urlString
+    }
+    
+    var searchCellImageUrl: String? {
+        Poster(size: .backdropSize, path: backdropPath).urlString
     }
 }

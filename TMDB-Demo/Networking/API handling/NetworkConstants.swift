@@ -38,6 +38,11 @@ struct EndPoints {
 
 enum PosterSizes: String {
     /**
+     w300 size. To be shown on recent search movies list
+     */
+    case backdropSize = "w300"
+    
+    /**
      W92 size. to be shown on the Movies list screen
      */
     case listSize = "w92"

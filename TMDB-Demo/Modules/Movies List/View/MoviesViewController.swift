@@ -14,7 +14,7 @@ class MoviesViewController: UIViewController {
     private var moviesObserver: AnyCancellable?
     private var stateObsrver: AnyCancellable?
     
-    private var movies: [MovieDetails] = [] {
+    private var movies: [MoviesVMitem] = [] {
         didSet {
             tableView.reloadData()
         }
@@ -62,16 +62,29 @@ class MoviesViewController: UIViewController {
     }
 }
 
-extension MoviesViewController: UITableViewDataSource, MovieTableViewCellDelegate {
+extension MoviesViewController: UITableViewDataSource, UITableViewDelegate,MovieTableViewCellDelegate {
     
     //MARK:- UITableView Data source
+    func numberOfSections(in tableView: UITableView) -> Int {
+        movies.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if movies.count > 1 {
+            return movies[section].type.rawValue
+        }
+        return nil
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        vm.moreMoviesAvailable ? movies.count + 1 : movies.count
+
+        //I
+        (movies[section].type == .nowPlaying && vm.moreMoviesAvailable) ? movies[section].movies.count + 1 : movies[section].movies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row >= movies.count {
+        if indexPath.row >= movies[indexPath.section].movies.count {
             print("Fetch movies")
             vm.fetchMovies()
             return tableView.dequeueReusableCell(withIdentifier: "LoadingCell", for: indexPath)
@@ -82,7 +95,7 @@ extension MoviesViewController: UITableViewDataSource, MovieTableViewCellDelegat
                 fatalError("Unexpected-> TableView doesn't have a cell with identifier \(identifier)")
             }
             
-            cell.configure(with: movies[indexPath.row])
+            cell.configure(with: movies[indexPath.section].movies[indexPath.row])
             cell.delegate = self
             
             return cell
@@ -92,7 +105,7 @@ extension MoviesViewController: UITableViewDataSource, MovieTableViewCellDelegat
     //MARK:- MovieTableViewCellDelegate
     func bookButtonTapped(cell: MovieTableViewCell) {
         if let indexPath = tableView.indexPath(for: cell) {
-            performSegue(withIdentifier: String(describing: MovieDetailsViewController.self), sender: movies[indexPath.row])
+            performSegue(withIdentifier: String(describing: MovieDetailsViewController.self), sender: movies[indexPath.section].movies[indexPath.row])
         }
     }
 }
