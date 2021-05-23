@@ -72,7 +72,7 @@ class MoviesVM: ObservableObject {
         }
     }
     
-    var searching = false {
+    private var searching = false {
         didSet {
             checkLoadMoreRowStatus()
         }
@@ -130,9 +130,45 @@ class MoviesVM: ObservableObject {
         }
     }
     
+    private func updateRecentSearch(show: Bool) {
+        if show {
+            if RecentSearchHandler.shared.recentSearchedMovies.count > 0 {
+                movies.removeAll(where: {$0.type == .recentSearch})
+                movies.insert(RecentSearchItem(sectionHeader: "Recent Search", movies: RecentSearchHandler.shared.recentSearchedMovies), at: 0)
+             
+                if let index = self.movies.firstIndex(where: {$0.type == .nowPlaying}) {
+                    self.movies[index].sectionHeader = "Now Playing"
+                }
+            }
+        }
+        else {
+            movies.removeAll(where: {$0.type == .recentSearch})
+            if let index = self.movies.firstIndex(where: {$0.type == .nowPlaying}) {
+                self.movies[index].sectionHeader = nil
+            }
+        }
+    }
+    
     //MARK:- Search functionality
     
     func search(text: String) {
         filteredMovies = allMovies.searchFilter(with: text)
+        updateRecentSearch(show: false)
+    }
+    
+    func searchBegins() {
+        searching = true
+        updateRecentSearch(show: true)
+    }
+    
+    func searchEnds() {
+        searching = false
+        updateRecentSearch(show: false)
+    }
+    
+    func movieTapped(movie: MovieDetails) {
+        if searching {
+            RecentSearchHandler.shared.addNew(movie: movie)
+        }
     }
 }

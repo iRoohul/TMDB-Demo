@@ -58,6 +58,7 @@ class MoviesViewController: UIViewController {
         if let movieDetailsVC = segue.destination as? MovieDetailsViewController {
             if let movie = sender as? MovieDetails {
                 movieDetailsVC.vm = MovieDetailsVM(selectedMovie: movie)
+                vm.movieTapped(movie: movie)
             }
         }
     }
@@ -101,6 +102,10 @@ extension MoviesViewController: UITableViewDataSource, UITableViewDelegate,Movie
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: String(describing: MovieDetailsViewController.self), sender: movies[indexPath.section].movies[indexPath.row])
+    }
+    
     //MARK:- MovieTableViewCellDelegate
     func bookButtonTapped(cell: MovieTableViewCell) {
         if let indexPath = tableView.indexPath(for: cell) {
@@ -116,13 +121,11 @@ extension MoviesViewController: UISearchResultsUpdating, UISearchControllerDeleg
     //MARk:- UISearchControllerDelegate
     
     func didPresentSearchController(_ searchController: UISearchController) {
-        vm.searching = true
-        print("Search begins")
+        vm.searchBegins()
     }
     
     func didDismissSearchController(_ searchController: UISearchController) {
-        vm.searching = false
-        print("Search Ends")
+        vm.searchEnds()
     }
     
     //MARK:- UISearchResultsUpdating Delegate

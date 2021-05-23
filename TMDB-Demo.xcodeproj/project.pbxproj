@@ -52,6 +52,7 @@
 		BEE9DD4F265A0D1F00B2BDE2 /* SearchServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE9DD4E265A0D1F00B2BDE2 /* SearchServiceTests.swift */; };
 		BEE9DD55265A1D5400B2BDE2 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE9DD54265A1D5400B2BDE2 /* SearchTableViewCell.swift */; };
 		BEE9DD63265A39F000B2BDE2 /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE9DD62265A39F000B2BDE2 /* LoadMoreTableViewCell.swift */; };
+		BEE9DD6B265A5D2A00B2BDE2 /* RecentSearchHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE9DD6A265A5D2900B2BDE2 /* RecentSearchHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +115,7 @@
 		BEE9DD4E265A0D1F00B2BDE2 /* SearchServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchServiceTests.swift; sourceTree = "<group>"; };
 		BEE9DD54265A1D5400B2BDE2 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		BEE9DD62265A39F000B2BDE2 /* LoadMoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMoreTableViewCell.swift; sourceTree = "<group>"; };
+		BEE9DD6A265A5D2900B2BDE2 /* RecentSearchHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -357,7 +359,7 @@
 		BEE15BA52650F3BE003E0D94 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				BECAA671265A075500C4D8C2 /* SearchService.swift */,
+				BEE9DD70265A729000B2BDE2 /* Search Handling */,
 				BEE15BA22650F39E003E0D94 /* Movies List */,
 				BEE15BA32650F3B1003E0D94 /* Movie Details */,
 			);
@@ -371,6 +373,15 @@
 				BEE9DD4E265A0D1F00B2BDE2 /* SearchServiceTests.swift */,
 			);
 			path = "TMDB-Demo Tests";
+			sourceTree = "<group>";
+		};
+		BEE9DD70265A729000B2BDE2 /* Search Handling */ = {
+			isa = PBXGroup;
+			children = (
+				BECAA671265A075500C4D8C2 /* SearchService.swift */,
+				BEE9DD6A265A5D2900B2BDE2 /* RecentSearchHandler.swift */,
+			);
+			path = "Search Handling";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -485,6 +496,7 @@
 				BE597C2026522A92004CAF18 /* MovieSynopsisService.swift in Sources */,
 				BEBADC8E2651804A00E8DEDC /* MovieSynopsis.swift in Sources */,
 				BEBADC952651819700E8DEDC /* Reviews.swift in Sources */,
+				BEE9DD6B265A5D2A00B2BDE2 /* RecentSearchHandler.swift in Sources */,
 				BE1EF81626522E55000D0C3A /* SimilarMoviesService.swift in Sources */,
 				BE21CFBE26512E4700F14D3F /* Network Enums.swift in Sources */,
 				BE21CFC42651323D00F14D3F /* MoviesService.swift in Sources */,
