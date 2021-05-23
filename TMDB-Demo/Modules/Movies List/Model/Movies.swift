@@ -27,7 +27,11 @@ struct Dates: Codable {
 }
 
 // MARK: - MovieDetails
-struct MovieDetails: Codable {
+struct MovieDetails: Codable, Searchable {
+    var searchableString: String {
+        originalTitle
+    }
+    
     let posterPath: String?
     let adult: Bool
     let overview, releaseDate: String
