@@ -39,11 +39,38 @@ struct RecentSearchItem: MoviesVMitem {
 
 class MoviesVM: ObservableObject {
     
+    private var allMovies: [MovieDetails] = [] {
+        didSet {
+            filteredMovies = allMovies
+        }
+    }
+    
+    /**
+     Movies item will be derived from the filtered list instead of the all movie list. So that filteredMovies becomes ultimate source of truth to load the UI irrespective of whether searching is true or false
+     */
+    private var filteredMovies: [MovieDetails] = [] {
+        didSet {
+            //Get the index for now playing item in the movies array which contains now playing as well as recent search
+            if let index = self.movies.firstIndex(where: {$0.type == .nowPlaying}) {
+                self.movies[index].movies = self.filteredMovies
+            }
+            else {
+                //If now playing movies are not there create one and add
+                self.movies.append(NowPlayingItem(movies: self.filteredMovies))
+            }
+        }
+    }
+    
+    var searching = false
+    
+    var showLoadMoreRow: Bool {
+        searching == false && moreMoviesAvailable == true
+    }
+    
     @Published private (set) var movies: [MoviesVMitem] = []
     @Published private (set) var state: FetchingServiceState = .finishedLoading
     
-    private (set) var moreMoviesAvailable = false
-    
+    private var moreMoviesAvailable = false
     private (set) var currentPage: Int = 1
     private (set) var totalPages: Int = Int.max
     
@@ -51,6 +78,7 @@ class MoviesVM: ObservableObject {
     
     //MARK:- Functions
     func fetchMovies() {
+        if searching {return}
         if currentPage > totalPages {return}
         
         let moviesService = MoviesService(parameters: [ParameterKeys.page.rawValue: String(currentPage)])
@@ -69,18 +97,17 @@ class MoviesVM: ObservableObject {
                     else {
                         self.moreMoviesAvailable = false
                     }
-                    //Get the index for now playing item in the movies array which contains now playing as well as recent search
-                    if let index = self.movies.firstIndex(where: {$0.type == .nowPlaying}) {
-                        self.movies[index].movies.append(contentsOf: movies.results)
-                    }
-                    else {
-                        //If now playing movies are not there create one and add
-                        self.movies.append(NowPlayingItem(movies: movies.results))
-                    }
+                    self.allMovies.append(contentsOf: movies.results)
                 case .failure(let error):
                     self.state = .error(error)
                 }
             }
         }
+    }
+    
+    //MARK:- Search functionality
+    
+    func search(text: String) {
+        filteredMovies = allMovies.searchFilter(with: text)
     }
 }

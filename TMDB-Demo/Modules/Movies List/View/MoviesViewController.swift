@@ -81,8 +81,9 @@ extension MoviesViewController: UITableViewDataSource, UITableViewDelegate,Movie
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        //I
-        (movies[section].type == .nowPlaying && vm.moreMoviesAvailable) ? movies[section].movies.count + 1 : movies[section].movies.count
+        //Only for `Now playing` section, add 1 more row(to show loader). Cell for row will add this row at the bottom
+        //VM maintains a Bool `showLoadMoreRow` whether to show load more or not.
+        (movies[section].type == .nowPlaying && vm.showLoadMoreRow) ? movies[section].movies.count + 1 : movies[section].movies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -115,13 +116,25 @@ extension MoviesViewController: UITableViewDataSource, UITableViewDelegate,Movie
 
 //MARK:- Search Handling
 
-extension MoviesViewController: UISearchResultsUpdating {
+extension MoviesViewController: UISearchResultsUpdating, UISearchControllerDelegate {
+    
+    //MARk:- UISearchControllerDelegate
+    
+    func didPresentSearchController(_ searchController: UISearchController) {
+        vm.searching = true
+        print("Search begins")
+    }
+    
+    func didDismissSearchController(_ searchController: UISearchController) {
+        vm.searching = false
+        print("Search Ends")
+    }
     
     //MARK:- UISearchResultsUpdating Delegate
     
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else { return }
-            print(text)
+        vm.search(text: text)
     }
     
     //MARK:-  Add functionality
@@ -129,10 +142,10 @@ extension MoviesViewController: UISearchResultsUpdating {
     private func addSearchController() {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
+        searchController.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Movie"
         navigationItem.searchController = searchController
     }
-
 }
 
