@@ -29,5 +29,5 @@ struct SimilarMoviesService: Service {
 }
 
 protocol SimilarMoviesAPIclient {
-    func getSimilar(service: SimilarMoviesService, completion: @escaping (_ result: APIResponse<Similar>) -> ())
+    func getSimilar(service: SimilarMoviesService, completion: @escaping (_ result: Result<Similar, NetworkError>) -> ())
 }

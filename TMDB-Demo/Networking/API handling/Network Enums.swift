@@ -12,23 +12,37 @@ enum RequestType {
     case parameters([String: String])
 }
 
-enum APIResponse<T> {
-    case success(T)
-    case failure(NetworkError)
+enum NetworkError:  Error, Equatable {
+    case badRequest
+    case unauthorized
+    case unknown
+    case noJSONData
+    case JSONDecoder
+    case other(String)
+    
+    var description: String {
+        switch self {
+        case .badRequest:
+            return "Bad request"
+        case .unauthorized:
+            return "Unauthorized access"
+        case .unknown:
+            return "Something went wrong"
+        case .noJSONData:
+            return "No data returned from the server"
+        case .JSONDecoder:
+            return "The data cannot be read because it isn't in the correct format"
+        case .other(let value):
+            return value
+        }
+    }
 }
 
-enum NetworkError: String, Error {
-    case badRequest = "Bad request"
-    case unauthorized = "Unauthorized access"
-    case unknown = "Something went wrong"
-    case noJSONData = "No data returned from the server"
-    case JSONDecoder = "The data cannot be read because it isn't in the correct format"
-}
 
 /**
  Defines the state when there is an Asynchronous API call.
  */
-enum FetchingServiceState: Equatable {
+enum FetchingServiceState: Equatable {    
     case loading
     case finishedLoading
     case error(NetworkError?)

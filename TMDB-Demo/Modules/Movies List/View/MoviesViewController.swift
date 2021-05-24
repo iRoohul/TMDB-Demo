@@ -45,8 +45,8 @@ class MoviesViewController: UIViewController {
                 break
             case .finishedLoading:
                 break
-            case .error(_):
-                break
+            case .error(let error):
+                self.showAlert(error?.description)
             }
         })
     }

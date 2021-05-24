@@ -29,5 +29,5 @@ struct MovieSynopsisService: Service {
 }
 
 protocol MovieSynopsisAPIclient {
-    func getMovieSynopsis(service: MovieSynopsisService, completion: @escaping (_ result: APIResponse<MovieSynopsis>) -> ())
+    func getMovieSynopsis(service: MovieSynopsisService, completion: @escaping (_ result: Result<MovieSynopsis, NetworkError>) -> ())
 }
