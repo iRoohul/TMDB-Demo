@@ -10,6 +10,7 @@ Home screen also has a search bar to search the movies in the list.
 
 ## References
 
+![alt text] (https://github.com/iRoohul/TMDB-Demo/blob/main/References/Home.PNG, "Home Screen")
 
 
 ### App Architecture, IDE & Language
