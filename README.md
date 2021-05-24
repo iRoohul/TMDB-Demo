@@ -17,6 +17,6 @@ Home screen also has a search bar to search the movies in the list.
 ### App Architecture, IDE & Language
 Architecture used :- MVVM
 </Br>
-XCode :- 12
+IDE :- XCode 12
 </Br>
-Swift:- 5
+Language :- Swift 5
