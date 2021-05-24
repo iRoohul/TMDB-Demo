@@ -9,31 +9,38 @@ import Foundation
 
 // MARK: - MovieSynopsis
 struct MovieSynopsis: Codable {
-    let adult: Bool
-    let backdropPath: String?
-    let belongsToCollection: BelongsToCollection?
-    let budget: Int
-    let genres: [Genre]
-    let homepage: String?
-    let id: Int
-    let imdbID: String?
-    let originalLanguage, originalTitle: String    
-    let overview: String?
-    let popularity: Double
-    let posterPath: String?
-    let productionCompanies: [ProductionCompany]
-    let productionCountries: [ProductionCountry]
-    let releaseDate: String
-    let revenue: Int
-    let runtime: Int?
-    let spokenLanguages: [SpokenLanguage]
-    let status, tagline, title: String
-    let video: Bool
-    let voteAverage: Double
-    let voteCount: Int
+    var adult: Bool? = nil
+    var backdropPath: String? = nil
+    var belongsToCollection: BelongsToCollection? = nil
+    var budget: Int? = nil
+    var genres: [Genre]
+    var homepage: String? = nil
+    var id: Int? = nil
+    var imdbID: String? = nil
+    var originalLanguage: String? = nil
+    var originalTitle: String? = nil
+    var overview: String? = nil
+    var popularity: Double
+    var posterPath: String? = nil
+    var productionCompanies: [ProductionCompany]? = nil
+    var productionCountries: [ProductionCountry]? = nil
+    var releaseDate: String? = nil
+    var revenue: Int? = nil
+    var runtime: Int? = nil
+    var spokenLanguages: [SpokenLanguage]? = nil
+    var status: String? = nil
+    var tagline: String? = nil
+    var title: String? = nil
+    var video: Bool? = nil
+    var voteAverage: Double
+    var voteCount: Int
     
     var imageUrl: String? {
         return Poster(size: .detailsSize, path: posterPath).urlString
+    }
+    
+    var placeholderImageUrl: String? {
+        return Poster(size: .listSize, path: posterPath).urlString
     }
 
     enum CodingKeys: String, CodingKey {
@@ -56,6 +63,24 @@ struct MovieSynopsis: Codable {
         case voteCount = "vote_count"
     }
 }
+
+extension MovieSynopsis {
+    /**
+     Synopsis can also be initialised with Movie detail. This is to immediately load the content without waiting for the response.
+     */
+    init(movie: MovieDetails) {
+        backdropPath = movie.backdropPath
+        posterPath = movie.posterPath
+        originalTitle = movie.originalTitle
+        title = movie.title
+        genres = []
+        releaseDate = movie.releaseDate
+        voteCount = movie.voteCount
+        voteAverage = movie.voteAverage
+        popularity = movie.popularity
+    }
+}
+
 
 // MARK: - BelongsToCollection
 struct BelongsToCollection: Codable {

@@ -11,11 +11,16 @@ class RemoteImageView: UIImageView {
     
     var urlString: String = ""
     /**
-     Downloads the image from the remote url and sets it to the image view. Make sure that the urlString is valid to avoid unnecessary call API call.
+     Downloads the image from the remote url and sets it to the image view. Make sure that the urlString is valid to avoid unnecessary API call.
      */
-    func setImage(urlString: String?, placeholder: UIImage?) {
+    func setImage(urlString: String?, placeholder: UIImage?, placeholderUrlString: String? = nil) {
         
-        self.image = placeholder
+        if let cached = DownloadManager.sharedInstance.cachedImage(for: placeholderUrlString ?? "") {
+            self.image = cached
+        }
+        else {
+            self.image = placeholder
+        }
         
         guard let urlString = urlString else {return}
         self.urlString = urlString

@@ -48,10 +48,16 @@ struct SynopsisItem: MovieDetailVMitem {
     
     let type: MovieDetailType = .synopsis
     let cellIdentifier = String(describing: SynopsisTableViewCell.self)
-    let rowHeight = UIScreen.main.bounds.width * (750/500)
+    //Aspect ratio of the poster is 500:750. 300 space extra at the bottom to show the details.
+    let rowHeight = (UIScreen.main.bounds.width * (750/500)) + 300
     var state: FetchingServiceState = .finishedLoading
     
     var data: MovieSynopsis?
+}
+extension SynopsisItem {
+    init(movie: MovieDetails) {
+        self.data = MovieSynopsis(movie: movie)
+    }
 }
 
 //MARK:- Similar Item type
@@ -120,13 +126,15 @@ struct ReviewsItem: MovieDetailVMitem {
 
 class MovieDetailsVM: ObservableObject {
     
-    @Published var vmItem: [MovieDetailVMitem] = [SynopsisItem(), SimilarItem(), CastItem(), CrewItem()]
+    @Published var vmItem: [MovieDetailVMitem] = []
     
     private (set) var selectedMovie: MovieDetails
     private let apiClient: MovieDetailsAPIClient = APIClient()
     
     init(selectedMovie: MovieDetails) {
         self.selectedMovie = selectedMovie
+        
+        vmItem = [SynopsisItem(movie: selectedMovie), SimilarItem(), CastItem(), CrewItem()]
     }
     
     //MARK:- Functions

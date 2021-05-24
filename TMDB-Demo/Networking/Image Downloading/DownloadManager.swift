@@ -57,4 +57,11 @@ class DownloadManager {
         }
         dataTask.resume()
     }
+    
+    /**
+     Returns an UIImage if its there in the Cache otherwise returns nil
+     */
+    func cachedImage(for url: String) -> UIImage? {
+        imageCache.object(forKey: url as NSString)
+    }
 }

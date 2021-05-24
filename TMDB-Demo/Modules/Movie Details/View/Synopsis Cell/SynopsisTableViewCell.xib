@@ -3,34 +3,98 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="SynopsisTableViewCell" rowHeight="535" id="aUS-Ow-CQd" customClass="SynopsisTableViewCell" customModule="TMDB_Demo" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="535"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="SynopsisTableViewCell" rowHeight="850" id="aUS-Ow-CQd" customClass="SynopsisTableViewCell" customModule="TMDB_Demo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="850"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aUS-Ow-CQd" id="7W8-GO-xcH">
-                <rect key="frame" x="0.0" y="0.0" width="414" height="535"/>
+                <rect key="frame" x="0.0" y="0.0" width="414" height="850"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="N9g-Si-rLv" customClass="RemoteImageView" customModule="TMDB_Demo" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="535"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="621"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="N9g-Si-rLv" secondAttribute="height" multiplier="500:750" id="Qbr-TU-4dh"/>
+                        </constraints>
                     </imageView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zvJ-h1-m26" customClass="RemoteImageView" customModule="TMDB_Demo" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="621" width="414" height="229"/>
+                    </imageView>
+                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zc5-1q-Zvg">
+                        <rect key="frame" x="0.0" y="621" width="414" height="229"/>
+                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="xY4-nj-Bmv">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="229"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gwz-V6-z1l">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="229"/>
+                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="e2k-cY-dLw">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="229"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </view>
+                                    <vibrancyEffect>
+                                        <blurEffect style="regular"/>
+                                    </vibrancyEffect>
+                                </visualEffectView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CHr-V6-QNj">
+                                    <rect key="frame" x="50" y="94.5" width="314" height="40"/>
+                                    <color key="backgroundColor" name="AccentColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="8oi-Vg-IzH"/>
+                                        <constraint firstAttribute="width" constant="314" id="bof-jc-aLg"/>
+                                    </constraints>
+                                    <state key="normal" title="BOOK NOW">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                            <integer key="value" value="10"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="Gwz-V6-z1l" firstAttribute="width" secondItem="xY4-nj-Bmv" secondAttribute="width" id="JDA-cR-KNK"/>
+                                <constraint firstItem="CHr-V6-QNj" firstAttribute="centerX" secondItem="xY4-nj-Bmv" secondAttribute="centerX" id="d5P-wz-nrE"/>
+                                <constraint firstItem="CHr-V6-QNj" firstAttribute="centerY" secondItem="xY4-nj-Bmv" secondAttribute="centerY" id="qoW-04-nKd"/>
+                                <constraint firstItem="Gwz-V6-z1l" firstAttribute="height" secondItem="xY4-nj-Bmv" secondAttribute="height" id="viD-3A-Crb"/>
+                                <constraint firstItem="Gwz-V6-z1l" firstAttribute="centerX" secondItem="xY4-nj-Bmv" secondAttribute="centerX" id="wJD-qF-GJr"/>
+                                <constraint firstItem="Gwz-V6-z1l" firstAttribute="centerY" secondItem="xY4-nj-Bmv" secondAttribute="centerY" id="zNg-tJ-lsb"/>
+                            </constraints>
+                        </view>
+                        <blurEffect style="regular"/>
+                    </visualEffectView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="N9g-Si-rLv" secondAttribute="trailing" id="2nx-Xa-PYO"/>
-                    <constraint firstAttribute="bottom" secondItem="N9g-Si-rLv" secondAttribute="bottom" id="8mG-gZ-PDh"/>
                     <constraint firstItem="N9g-Si-rLv" firstAttribute="leading" secondItem="7W8-GO-xcH" secondAttribute="leading" id="GWH-04-beO"/>
+                    <constraint firstItem="zvJ-h1-m26" firstAttribute="centerX" secondItem="zc5-1q-Zvg" secondAttribute="centerX" id="MSy-0h-Tgb"/>
+                    <constraint firstItem="zvJ-h1-m26" firstAttribute="width" secondItem="zc5-1q-Zvg" secondAttribute="width" id="Q5W-26-FN3"/>
+                    <constraint firstItem="zc5-1q-Zvg" firstAttribute="leading" secondItem="7W8-GO-xcH" secondAttribute="leading" id="Ra2-5p-GWn"/>
+                    <constraint firstAttribute="bottom" secondItem="zc5-1q-Zvg" secondAttribute="bottom" id="VpS-Mg-yyr"/>
+                    <constraint firstItem="zvJ-h1-m26" firstAttribute="height" secondItem="zc5-1q-Zvg" secondAttribute="height" id="efi-z1-qdq"/>
                     <constraint firstItem="N9g-Si-rLv" firstAttribute="top" secondItem="7W8-GO-xcH" secondAttribute="top" id="faK-De-uw1"/>
                     <constraint firstItem="N9g-Si-rLv" firstAttribute="top" secondItem="7W8-GO-xcH" secondAttribute="top" id="gD5-ka-CCk"/>
+                    <constraint firstAttribute="trailing" secondItem="zc5-1q-Zvg" secondAttribute="trailing" id="gdF-GG-3Ej"/>
+                    <constraint firstItem="zvJ-h1-m26" firstAttribute="centerY" secondItem="zc5-1q-Zvg" secondAttribute="centerY" id="q1u-Dq-a4Z"/>
+                    <constraint firstItem="zc5-1q-Zvg" firstAttribute="top" secondItem="N9g-Si-rLv" secondAttribute="bottom" id="xVQ-wq-V4Z"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="bottomImageView" destination="zvJ-h1-m26" id="QWM-Xn-5ra"/>
                 <outlet property="movieImageView" destination="N9g-Si-rLv" id="IaJ-vf-1kD"/>
             </connections>
-            <point key="canvasLocation" x="75" y="91"/>
+            <point key="canvasLocation" x="73.913043478260875" y="196.20535714285714"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>
