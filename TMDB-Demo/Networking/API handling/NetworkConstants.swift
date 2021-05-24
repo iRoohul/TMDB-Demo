@@ -45,7 +45,7 @@ enum PosterSizes: String {
     /**
      W92 size. to be shown on the Movies list screen
      */
-    case listSize = "w92"
+    case listSize = "w154"
     
     /**
      w500 size. To be shown on Details screen
@@ -55,7 +55,7 @@ enum PosterSizes: String {
     /**
      Cast and Crew profile.
      */
-    case profile = "w45"
+    case profile = "w92"
     
     /**
      Original size.
