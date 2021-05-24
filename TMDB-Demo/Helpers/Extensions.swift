@@ -28,6 +28,10 @@ extension String {
         
         return df.string(from: date)
     }
+    
+    var completeLanguage: String? {
+        Locale.current.localizedString(forLanguageCode: self)
+    }
 }
 
 extension Gender {

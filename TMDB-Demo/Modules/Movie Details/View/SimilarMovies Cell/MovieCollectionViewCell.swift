@@ -22,7 +22,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     func configure(movie: MovieDetails) {
         bannerImageView.setImage(urlString: movie.cellImageUrl, placeholder: #imageLiteral(resourceName: "MoviePlaceholder"))
         nameLabel.text = movie.originalTitle
-        captionLabel.text = movie.originalLanguage
+        captionLabel.text = movie.originalLanguage.completeLanguage
     }
     
     private func clear() {

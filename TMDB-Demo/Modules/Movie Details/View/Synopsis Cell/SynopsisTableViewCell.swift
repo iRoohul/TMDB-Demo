@@ -37,7 +37,7 @@ class SynopsisTableViewCell: MovieDetailRowCell {
             bottomImageView.setImage(urlString: data.imageUrl, placeholder: nil, placeholderUrlString: data.placeholderImageUrl)
             movieImageView.setImage(urlString: data.imageUrl, placeholder: nil, placeholderUrlString: data.placeholderImageUrl)
             
-            languageLabel.text = "\u{2022} " + (data.originalLanguage ?? "")
+            languageLabel.text = "\u{2022} " + (data.originalLanguage?.completeLanguage ?? "")
             durationLabel.text = "\u{2022} " + (data.runtime?.durationInHour ?? "")
             releaseDateLabel.text = "\u{2022} " + (data.releaseDate?.formattedDate ?? "")
             genreLabel.text = GenreHandler.shared.genreText(for: data.genres)
