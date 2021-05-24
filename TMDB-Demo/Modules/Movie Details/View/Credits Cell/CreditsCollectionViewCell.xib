@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CreditsCollectionViewCell" id="8of-C0-nPF" customClass="CreditsCollectionViewCell" customModule="TMDB_Demo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="150" height="224"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="KrA-BN-ds3">
+                <rect key="frame" x="0.0" y="0.0" width="150" height="224"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="malePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="jNb-I0-vyt" customClass="RemoteImageView" customModule="TMDB_Demo" customModuleProvider="target">
+                        <rect key="frame" x="19" y="10" width="112.5" height="112.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="jNb-I0-vyt" secondAttribute="height" multiplier="1:1" id="YeB-bg-xN6"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Roohul Amin Khan" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kcn-51-hLC">
+                        <rect key="frame" x="10" y="142.5" width="130" height="50.5"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Writer" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Goo-Y9-To6">
+                        <rect key="frame" x="10" y="203" width="130" height="16"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                        <color key="textColor" systemColor="systemGrayColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="jNb-I0-vyt" firstAttribute="centerX" secondItem="KrA-BN-ds3" secondAttribute="centerX" id="0nx-GW-Qfj"/>
+                    <constraint firstItem="Goo-Y9-To6" firstAttribute="trailing" secondItem="Kcn-51-hLC" secondAttribute="trailing" id="2HY-Jm-HbA"/>
+                    <constraint firstItem="Goo-Y9-To6" firstAttribute="top" secondItem="Kcn-51-hLC" secondAttribute="bottom" constant="10" id="4sB-2k-CXK"/>
+                    <constraint firstAttribute="bottom" secondItem="Goo-Y9-To6" secondAttribute="bottom" constant="5" id="5VB-bP-rB9"/>
+                    <constraint firstAttribute="trailing" secondItem="Kcn-51-hLC" secondAttribute="trailing" constant="10" id="9OB-Ms-iRk"/>
+                    <constraint firstItem="jNb-I0-vyt" firstAttribute="top" secondItem="KrA-BN-ds3" secondAttribute="top" constant="10" id="GCu-xU-Upa"/>
+                    <constraint firstItem="jNb-I0-vyt" firstAttribute="width" secondItem="KrA-BN-ds3" secondAttribute="width" multiplier="0.75" id="Hi6-uk-XMD"/>
+                    <constraint firstItem="Kcn-51-hLC" firstAttribute="leading" secondItem="KrA-BN-ds3" secondAttribute="leading" constant="10" id="ZKs-vo-Mxr"/>
+                    <constraint firstItem="Goo-Y9-To6" firstAttribute="leading" secondItem="Kcn-51-hLC" secondAttribute="leading" id="dkQ-Hw-Jzy"/>
+                    <constraint firstItem="Kcn-51-hLC" firstAttribute="top" secondItem="jNb-I0-vyt" secondAttribute="bottom" constant="20" id="xr6-wq-d4K"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <size key="customSize" width="325" height="531"/>
+            <connections>
+                <outlet property="captionLabel" destination="Goo-Y9-To6" id="fsw-fM-7Am"/>
+                <outlet property="nameLabel" destination="Kcn-51-hLC" id="T27-jZ-59M"/>
+                <outlet property="profileImageView" destination="jNb-I0-vyt" id="m0A-rS-szS"/>
+            </connections>
+            <point key="canvasLocation" x="50.724637681159422" y="68.303571428571431"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="malePlaceholder" width="1000" height="939"/>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

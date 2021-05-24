@@ -53,6 +53,11 @@ enum PosterSizes: String {
     case detailsSize = "w500"
     
     /**
+     Cast and Crew profile.
+     */
+    case profile = "w45"
+    
+    /**
      Original size.
      */
     case original = "original"

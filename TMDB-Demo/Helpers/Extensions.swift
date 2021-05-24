@@ -5,7 +5,7 @@
 //  Created by roohulk on 16/05/21.
 //
 
-import Foundation
+import UIKit
 
 extension Dictionary {
     mutating func append(dict: [Key: Value]){
@@ -27,5 +27,18 @@ extension String {
         df.dateFormat = "MMM d, yyyy"
         
         return df.string(from: date)
+    }
+}
+
+extension Gender {
+    var placeHolderImage: UIImage {
+        switch self {
+        case .male:
+            return #imageLiteral(resourceName: "malePlaceholder")
+        case .female:
+            return #imageLiteral(resourceName: "femalePlaceholder")
+        case .unknown, .other:
+            return #imageLiteral(resourceName: "unisexPlaceholder")
+        }
     }
 }

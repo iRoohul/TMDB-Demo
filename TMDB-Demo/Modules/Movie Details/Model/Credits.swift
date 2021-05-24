@@ -7,6 +7,13 @@
 
 import Foundation
 
+enum Gender: Int {
+    case unknown = 0
+    case female = 1
+    case male = 2
+    case other = 3
+}
+
 //MARK:- Credits
 struct Credits: Codable {
     let id: Int
@@ -24,6 +31,10 @@ struct Cast: Codable {
     let castID: Int
     let character, creditID: String
     let order: Int
+    
+    var imageUrl: String? {
+        Poster(size: .profile, path: profilePath).urlString
+    }
 
     enum CodingKeys: String, CodingKey {
         case adult, gender, id
@@ -47,6 +58,10 @@ struct Crew: Codable {
     let popularity: Double
     let profilePath: String?
     let creditID, department, job: String
+    
+    var imageUrl: String? {
+        Poster(size: .profile, path: profilePath).urlString
+    }
 
     enum CodingKeys: String, CodingKey {
         case adult, gender, id

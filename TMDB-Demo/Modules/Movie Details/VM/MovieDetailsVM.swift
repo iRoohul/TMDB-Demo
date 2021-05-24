@@ -17,6 +17,10 @@ enum MovieDetailType {
     case review
 }
 
+fileprivate let similarMoviesRowHeight: CGFloat = 350
+fileprivate let castNcrewRowHeight: CGFloat = 300
+fileprivate let reviewsRowHeight: CGFloat = 300
+
 //MARK:- VM Items
 
 //MARK:- MovieDetailVMitem Protocol
@@ -32,23 +36,7 @@ protocol MovieDetailVMitem {
     var state: FetchingServiceState {get set}
     
     mutating func updateData<T: Codable>(data: T)
-//    mutating func updateValues(result: APIResponse<DataType>)
 }
-
-//extension MovieDetailVMitem {
-//    mutating func updateValues(result: APIResponse<DataType>) {
-//        DispatchQueue.main.async {
-//            self.state = .finishedLoading
-//
-//            switch result {
-//            case .success(let data):
-//                self.data = data
-//            case .failure(let error):
-//                self.state = .error(error)
-//            }
-//        }
-//    }
-//}
 
 //MARK:- Synopsis Item type
 
@@ -75,7 +63,7 @@ struct SimilarItem: MovieDetailVMitem {
     
     var type: MovieDetailType = .similar
     let cellIdentifier = String(describing: SimilarMoviesTableViewCell.self)
-    let rowHeight: CGFloat = 350
+    let rowHeight: CGFloat = similarMoviesRowHeight
     var state: FetchingServiceState = .finishedLoading
     
     var data: Similar?
@@ -85,14 +73,13 @@ struct SimilarItem: MovieDetailVMitem {
 
 struct CastItem: MovieDetailVMitem {
     mutating func updateData<T: Codable>(data: T) {
-        if let credit = data as? Credits {
-            self.data = credit.cast
-        }
+        self.data = data as? [Cast] ?? []
+        self.data.sort {$0.popularity > $1.popularity}
     }
     
     var type: MovieDetailType = .cast
     let cellIdentifier = String(describing: CreditsTableViewCell.self)
-    let rowHeight: CGFloat = 200
+    let rowHeight: CGFloat = castNcrewRowHeight
     var state: FetchingServiceState = .finishedLoading
     
     var data: [Cast] = []
@@ -102,14 +89,13 @@ struct CastItem: MovieDetailVMitem {
 
 struct CrewItem: MovieDetailVMitem {
     mutating func updateData<T: Codable>(data: T) {
-        if let credit = data as? Credits {
-            self.data = credit.crew
-        }
+        self.data = data as? [Crew] ?? []
+        self.data.sort {$0.popularity > $1.popularity}
     }
     
     var type: MovieDetailType = .crew
     
-    let rowHeight: CGFloat = 200
+    let rowHeight: CGFloat = castNcrewRowHeight
     var state: FetchingServiceState = .finishedLoading
     let cellIdentifier = String(describing: CreditsTableViewCell.self)
     var data: [Crew] = []
@@ -124,7 +110,7 @@ struct ReviewsItem: MovieDetailVMitem {
     
     var type: MovieDetailType = .review
     let cellIdentifier = String(describing: ReviewTableViewCell.self)
-    let rowHeight: CGFloat = 200
+    let rowHeight: CGFloat = reviewsRowHeight
     var state: FetchingServiceState = .finishedLoading
     
     var data: Reviews?
@@ -225,22 +211,5 @@ class MovieDetailsVM: ObservableObject {
     }
 
     //MARK:- Reviews
-    private func fetchReviews() {
-//        let service = ReviewsService(movieId: String(selectedMovie.id), parameters: [:])
-//
-//        state.reviewsState = .loading
-//        apiClient.getMovieReviews(service: service) { response in
-//
-//            DispatchQueue.main.async {
-//                self.state.reviewsState = .finishedLoading
-//
-//                switch response {
-//                case .success(let reviews):
-//                    self.vmItem.reviews = reviews
-//                case .failure(let error):
-//                    self.state.reviewsState = .error(error)
-//                }
-//            }
-//        }
-    }
+    private func fetchReviews() {}
 }
