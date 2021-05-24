@@ -29,5 +29,5 @@ struct CreditsService: Service {
 }
 
 protocol MovieCreditsAPIclient {
-    func getMovieCredits(service: CreditsService, completion: @escaping (_ result: APIResponse<Credits>) -> ())
+    func getMovieCredits(service: CreditsService, completion: @escaping (_ result: Result<Credits, NetworkError>) -> ())
 }

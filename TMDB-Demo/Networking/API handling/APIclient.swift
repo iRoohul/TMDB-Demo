@@ -9,13 +9,11 @@ import Foundation
 
 class APIClient {
 
-//    private var session = URLSession(configuration: .default)
-
     /**
      Call this method to perfom a web service of type `Service`
-     - Parameter completion: result of type `APIResponse`.
+     - Parameter completion: result of type `Result`.
      */
-    private func request<T: Codable>(service: Service, completion: @escaping (APIResponse<T>) -> ()) {
+    private func request<T: Codable>(service: Service, completion: @escaping (Result<T, NetworkError>) -> ()) {
         guard let request = URLRequest(service: service) else {
             completion(.failure(.badRequest))
             return
@@ -29,8 +27,12 @@ class APIClient {
         task.resume()
     }
 
-    private func handleDataResponse<T: Decodable>(data: Data?, response: HTTPURLResponse?, error: Error?, completion: (APIResponse<T>) -> ()) {
-        guard error == nil else { return completion(.failure(.unknown)) }
+    private func handleDataResponse<T: Decodable>(data: Data?, response: HTTPURLResponse?, error: Error?, completion: (Result<T, NetworkError>) -> ()) {
+        
+        guard error == nil else {
+            completion(.failure(.other(error?.localizedDescription ?? "Something went wrong!")))
+            return
+        }
         guard let response = response, let data = data else { return completion(.failure(.noJSONData)) }
         switch response.statusCode {
         case 200...299:
@@ -60,23 +62,23 @@ extension APIClient: MoviesAPIclient, MovieDetailsAPIClient {
     
     //MARK:- Services
     
-    func getMovies(service: MoviesService, completion: @escaping (APIResponse<Movies>) -> ()) {
+    func getMovies(service: MoviesService, completion: @escaping (Result<Movies, NetworkError>) -> ()) {
         request(service: service, completion: completion)
     }
     
-    func getMovieSynopsis(service: MovieSynopsisService, completion: @escaping (APIResponse<MovieSynopsis>) -> ()) {
+    func getMovieSynopsis(service: MovieSynopsisService, completion: @escaping (Result<MovieSynopsis, NetworkError>) -> ()) {
         request(service: service, completion: completion)
     }
     
-    func getMovieReviews(service: ReviewsService, completion: @escaping (APIResponse<Reviews>) -> ()) {
+    func getMovieReviews(service: ReviewsService, completion: @escaping (Result<Reviews, NetworkError>) -> ()) {
         request(service: service, completion: completion)
     }
     
-    func getMovieCredits(service: CreditsService, completion: @escaping (APIResponse<Credits>) -> ()) {
+    func getMovieCredits(service: CreditsService, completion: @escaping (Result<Credits, NetworkError>) -> ()) {
         request(service: service, completion: completion)
     }
     
-    func getSimilar(service: SimilarMoviesService, completion: @escaping (APIResponse<Similar>) -> ()) {
+    func getSimilar(service: SimilarMoviesService, completion: @escaping (Result<Similar, NetworkError>) -> ()) {
         request(service: service, completion: completion)
     }
     

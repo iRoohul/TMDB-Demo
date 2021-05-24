@@ -29,5 +29,5 @@ struct ReviewsService: Service {
 }
 
 protocol MovieReviewsAPIclient {
-    func getMovieReviews(service: ReviewsService, completion: @escaping (_ result: APIResponse<Reviews>) -> ())
+    func getMovieReviews(service: ReviewsService, completion: @escaping (_ result: Result<Reviews, NetworkError>) -> ())
 }
