@@ -42,3 +42,21 @@ extension Gender {
         }
     }
 }
+
+extension Int {
+    var durationInHour: String? {
+        if self <= 0 {return nil}
+        
+        let hours = self / 60
+        let mins = self % 60
+        
+        var duration = ""
+        if hours > 0 {
+            duration += String(hours) + " hours"
+        }
+        if mins > 0 {
+            duration += " " + String(mins) + " mins"
+        }
+        return duration.trimmingCharacters(in: .whitespaces)
+    }
+}

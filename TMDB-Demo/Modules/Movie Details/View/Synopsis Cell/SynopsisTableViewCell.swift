@@ -19,6 +19,12 @@ class SynopsisTableViewCell: MovieDetailRowCell {
      */
     @IBOutlet weak var bottomImageView: RemoteImageView!
     
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var languageLabel: UILabel!
+    @IBOutlet weak var durationLabel: UILabel!
+    @IBOutlet weak var genreLabel: UILabel!
+    @IBOutlet weak var releaseDateLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -27,9 +33,16 @@ class SynopsisTableViewCell: MovieDetailRowCell {
         
         super.configure(item: item)
         
-        if let synopsis = item as? SynopsisItem {
-            bottomImageView.setImage(urlString: synopsis.data?.imageUrl, placeholder: nil, placeholderUrlString: synopsis.data?.placeholderImageUrl)
-            movieImageView.setImage(urlString: synopsis.data?.imageUrl, placeholder: nil, placeholderUrlString: synopsis.data?.placeholderImageUrl)
+        if let synopsis = item as? SynopsisItem, let data = synopsis.data {
+            bottomImageView.setImage(urlString: data.imageUrl, placeholder: nil, placeholderUrlString: data.placeholderImageUrl)
+            movieImageView.setImage(urlString: data.imageUrl, placeholder: nil, placeholderUrlString: data.placeholderImageUrl)
+            
+            languageLabel.text = "\u{2022} " + (data.originalLanguage ?? "")
+            durationLabel.text = "\u{2022} " + (data.runtime?.durationInHour ?? "")
+            releaseDateLabel.text = "\u{2022} " + (data.releaseDate?.formattedDate ?? "")
+            genreLabel.text = GenreHandler.shared.genreText(for: data.genres)
+            
+            descriptionLabel.text = data.overview
         }
     }
 }

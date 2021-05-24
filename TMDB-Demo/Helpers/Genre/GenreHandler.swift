@@ -27,12 +27,17 @@ struct GenreHandler {
 }
 
 extension GenreHandler {
+    
+    func genreText(for genre: [Genre]) -> String {
+        genre.map {$0.formattedName}.joined(separator: " ")
+    }
+    
     func genreText(for ids: [Int]) -> String {
         //Ids can be like [1, 2, 3]
         let genres = ids.compactMap { id in
             self.genres.filter {$0.id == id}.first
         }
-        return genres.map {$0.formattedName}.joined(separator: " ")
+        return genreText(for: genres)
     }
 }
 
