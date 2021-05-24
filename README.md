@@ -8,6 +8,9 @@ Home screen also has a search bar to search the movies in the list.
 <b> 2. Movie Details screen :-</b> This screen shows the details about the movie. It has multiple rows like Synopsis, Similar movies, Cast and crew details.
 </Br>
 
+## References
+
+
 
 ### App Architecture, IDE & Language
 Architecture used :- MVVM
