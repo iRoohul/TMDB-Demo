@@ -42,10 +42,10 @@
                                     </vibrancyEffect>
                                 </visualEffectView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CHr-V6-QNj">
-                                    <rect key="frame" x="50" y="94.5" width="314" height="40"/>
+                                    <rect key="frame" x="50" y="92" width="314" height="45"/>
                                     <color key="backgroundColor" name="AccentColor"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="40" id="8oi-Vg-IzH"/>
+                                        <constraint firstAttribute="height" constant="45" id="8oi-Vg-IzH"/>
                                         <constraint firstAttribute="width" constant="314" id="bof-jc-aLg"/>
                                     </constraints>
                                     <state key="normal" title="BOOK NOW">
@@ -94,7 +94,7 @@
     </objects>
     <resources>
         <namedColor name="AccentColor">
-            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.92941176470588238" green="0.25490196078431371" blue="0.38823529411764707" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
