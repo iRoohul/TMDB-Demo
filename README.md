@@ -1,8 +1,8 @@
 # TMDB-DEMO
 ## Overview
-A sample application to show list of movies and their details using APIs from https://developers.themoviedb.org/ </Br></Br>
+A sample application to show list of movies and their details using APIs from [TMDB](https://developers.themoviedb.org/) </Br></Br>
 
-The idea is to create an app with minimum(but commonly used features) using the best practices and high coding standard. It can be used as a reference point to design the boilerplate code. As there is no silver bullet for coding standard, I have tried using the commonly used best practices, DRY being one of them. However, as always, there exist plenty of room for improvement in the code(feedback will be appreciated :p).
+The idea is to create an app with minimum(but commonly used features) following the best practices and high coding standards. It can be used as a reference point to design the boilerplate code. As there is no silver bullet for coding standard, I have tried using the commonly used best practices, [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) being one of them. However, as always, there exist plenty of room for improvement in the code(feedback will be appreciated :p).
 
 <b> 1. Now Playing Screen :-</b> It is the home screen. It shows the list of Now playing movies in pagination form. Movies fetched from API gradually as the user scrolls down to the bottom.
 </Br>
